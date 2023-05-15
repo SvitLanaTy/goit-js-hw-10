@@ -1,5 +1,5 @@
 export default {
-  searchBoxEl: document.getElementById('search-box'),
-  countryListEl: document.querySelector(`.country-list`),
-  countryInfoEl: document.querySelector(`.country-info`),
+  searchBox: document.getElementById('search-box'),
+  countryList: document.querySelector(`.country-list`),
+  countryInfo: document.querySelector(`.country-info`),
 };
