@@ -1,8 +1,8 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
-import refs from './scripts/refs.js';
-import { fetchCountries } from './scripts/fetchCountries.js';
+import refs from './js/refs.js';
+import { fetchCountries } from './js/fetchCountries.js';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -20,7 +20,7 @@ function onSearchCountry(e) {
         Notiflix.Notify.failure(
           'Too many matches found. Please enter a more specific name.'
         );
-        onError();
+        clearMarkup();
       } else {
         if (quantityCountries > 1 && quantityCountries <= 10) {
           createCountryList(data);
@@ -31,7 +31,12 @@ function onSearchCountry(e) {
         }
       }
     })
-    .catch(onError);
+    .catch(err => {
+      if (err.message === '404') {
+        Notiflix.Notify.failure('Oops, there is no country with that name');
+      }
+      clearMarkup();
+    });
 }
 
 function createCountryInfo(data) {
@@ -69,7 +74,7 @@ function createCountryList(data) {
   refs.countryInfo.innerHTML = markup;
 }
 
-function onError() {
+function clearMarkup() {
   refs.countryList.innerHTML = '';
   refs.countryInfo.innerHTML = '';
 }
