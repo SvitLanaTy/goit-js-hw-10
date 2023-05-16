@@ -33,9 +33,9 @@ function onSearchCountry(e) {
     })
     .catch(err => {
       if (err.message === '404') {
-        Notiflix.Notify.failure('Oops, there is no country with that name');
+        clearMarkup();
       }
-      clearMarkup();
+      Notiflix.Notify.failure('Oops, there is no country with that name');
     });
 }
 
